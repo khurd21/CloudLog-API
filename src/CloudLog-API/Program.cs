@@ -1,7 +1,17 @@
 using Asp.Versioning;
+using CloudLogAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Dependency Injections
+
+// Logbook
+builder.Services.AddTransient<ILogbookService, LogbookService>(context =>
+{
+    ILogger<ILogbookService> logger = context.GetRequiredService<ILogger<ILogbookService>>();
+    return new LogbookService(logger);
+});
 
 // Add services to the container.
 

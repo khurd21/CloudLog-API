@@ -5,6 +5,9 @@ namespace CloudLogAPI.Entities;
 
 public sealed class ListJumpsRequest
 {
+    [Range(1, int.MaxValue, ErrorMessage=$"{nameof(this.JumpNo)} must be greater than zero.")]
+    public int? JumpNo { get; init; }
+
     [Range(1, int.MaxValue, ErrorMessage=$"{nameof(this.From)} must be greater than zero.")]
     public int? From { get; init; }
 
