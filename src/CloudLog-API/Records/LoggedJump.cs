@@ -8,8 +8,9 @@ namespace CloudLogAPI.Records;
 [DynamoDBTable(nameof(LoggedJump))]
 public sealed class LoggedJump
 {
+    public LoggedJump() {}
+
     [DynamoDBHashKey]
-    [Required]
     [JsonIgnore]
     public string? Id { get; set; }
 
@@ -18,10 +19,12 @@ public sealed class LoggedJump
     public int JumpNumber { get; init; }
 
     [DynamoDBProperty]
-    public DateTime? Date { get; init; }
+    [Required]
+    public DateTime Date { get; init; }
 
     [DynamoDBProperty]
-    public JumpType? JumpType { get; init; }
+    [Required]
+    public JumpType JumpType { get; init; }
 
     [DynamoDBProperty]
     public string? Aircraft { get; init; }

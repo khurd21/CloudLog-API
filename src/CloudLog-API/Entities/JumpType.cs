@@ -1,38 +1,16 @@
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace CloudLogAPI.Entities;
 
-public class JumpTypeConverter : JsonConverter<JumpType>
-{
-    public override JumpType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-    {
-        if (reader.TokenType == JsonTokenType.String)
-        {
-            if (Enum.TryParse(reader.GetString(), true, out JumpType result))
-            {
-                return result;
-            }
-        }
-
-        throw new JsonException($"Unable to parse {nameof(JumpType)} from JSON.");
-    }
-
-    public override void Write(Utf8JsonWriter writer, JumpType value, JsonSerializerOptions options)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-[JsonConverter(typeof(JumpTypeConverter))]
+[Flags]
 public enum JumpType
 {
-    Belly,
-    FreeFly,
-    WingSuit,
-    HighPull,
-    Tandem,
-    AFF,
-    CRW,
-    XRW,
+    Belly = 0,
+    FreeFly = 1,
+    WingSuit = 2,
+    HighPull = 3,
+    Tandem = 4,
+    AFF = 5,
+    CRW = 6,
+    XRW = 7,
 }
