@@ -20,8 +20,7 @@ public class DynamoDBTableManager : IDynamoDBTableManager
     {
         Task<CreateTableResponse>[] createTableTasks = new Task<CreateTableResponse>[]
         {
-            // TODO: Make SkydiverInfo Table
-            // this.CreateSkydiverInfoTableAsync(),
+            this.CreateUserInfoTableAsync(),
             this.CreateLoggedJumpTableAsync(),
         };
         Task task = Task.WhenAll(createTableTasks);
@@ -39,6 +38,40 @@ public class DynamoDBTableManager : IDynamoDBTableManager
         task.Wait();
         this.AssertAndLogTaskResult(nameof(this.DeleteTables), task);
         return this.ConvertTaskToEnumerable(deleteTableTasks);
+    }
+
+    private async Task<CreateTableResponse> CreateUserInfoTableAsync()
+    {
+        List<AttributeDefinition> attributeDefinitions = new()
+        {
+            new()
+            {
+                AttributeName = nameof(UserInfo.Id),
+                AttributeType = ScalarAttributeType.S,
+            },
+        };
+        List<KeySchemaElement> keySchemaElements = new()
+        {
+            new()
+            {
+                AttributeName = nameof(UserInfo.Id),
+                KeyType = KeyType.HASH,
+            },
+        };
+        ProvisionedThroughput provisionedThroughput = new()
+        {
+            ReadCapacityUnits = 5,
+            WriteCapacityUnits = 6,
+        };
+
+        CreateTableRequest request = new()
+        {
+            TableName = nameof(UserInfo),
+            AttributeDefinitions = attributeDefinitions,
+            KeySchema = keySchemaElements,
+            ProvisionedThroughput = provisionedThroughput,
+        };
+        return await this.CreateAndLogTable(request);
     }
 
     private async Task<CreateTableResponse> CreateLoggedJumpTableAsync()

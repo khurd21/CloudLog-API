@@ -23,7 +23,7 @@ public class LogbookService : ILogbookService
         {
             throw new CloudLogException("Identifier for jumper is required.");
         }
-        if (!this.VerifyJumpExists(jump.Id, jump.JumpNumber))
+        if (jump.JumpNumber.HasValue && !this.VerifyJumpExists(jump.Id, jump.JumpNumber.Value))
         {
             throw new CloudLogException($"Jump {jump.JumpNumber} does not already exists.");
         }
@@ -38,7 +38,7 @@ public class LogbookService : ILogbookService
         {
             throw new CloudLogException("Identifier for jumper is required.");
         }
-        if (!this.VerifyJumpExists(jump.Id, jump.JumpNumber))
+        if (jump.JumpNumber.HasValue && !this.VerifyJumpExists(jump.Id, jump.JumpNumber.Value))
         {
             throw new CloudLogException($"Jump {jump.JumpNumber} does not already exists.");
         }
@@ -65,7 +65,7 @@ public class LogbookService : ILogbookService
         {
             throw new CloudLogException("Identifier for jumper is required.");
         }
-        if (this.VerifyJumpExists(jump.Id, jump.JumpNumber))
+        if (jump.JumpNumber.HasValue && this.VerifyJumpExists(jump.Id, jump.JumpNumber.Value))
         {
             throw new CloudLogException($"Jump {jump.JumpNumber} already exists.");
         }

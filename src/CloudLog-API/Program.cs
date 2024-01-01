@@ -90,6 +90,18 @@ builder.Services.AddTransient<ILogbookService, LogbookService>(context =>
     return new(logger, dynamoDBContext);
 });
 
+/// <summary>
+/// Creates the UserInfoService injection.
+/// </summary>
+/// <typeparam name="IUserInfoService">Interface for which to inject.</typeparam>
+/// <typeparam name="UserInfoService">Implementing class of IUserInfoService.</typeparam>
+/// <value></value>
+builder.Services.AddTransient<IUserInfoService, UserInfoService>(context =>
+{
+    var dynamoDBContext = context.GetRequiredService<IDynamoDBContext>();
+    return new(dynamoDBContext);
+});
+
 ///////////////////////////////////////////////
 /// 3rd Party Additions
 ///////////////////////////////////////////////

@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Asp.Versioning;
 using CloudLogAPI.Entities;
 using CloudLogAPI.Exceptions;
