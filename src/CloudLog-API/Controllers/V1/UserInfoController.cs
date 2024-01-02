@@ -23,7 +23,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
 
     [HttpGet("defaultInfo")]
     [ProducesResponseType(typeof(DefaultInfoResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetDefaultInfo()
     {
         string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
@@ -31,7 +31,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
 
         try
@@ -49,7 +49,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
 
     [HttpGet("userInfo")]
     [ProducesResponseType(typeof(UserInfoResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetUserInfo()
     {
         string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
@@ -57,7 +57,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
 
         try
@@ -75,7 +75,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
 
     [HttpPost("defaultInfo")]
     [ProducesResponseType(typeof(DefaultInfoResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SetDefaultInfo(DefaultInfoRequest defaultInfoRequest)
     {
         string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
@@ -83,13 +83,13 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
         if (defaultInfoRequest.DefaultInfo == null)
         {
             return await Task.FromResult(
                 this.Problem(detail: "No default info was provided.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
 
         try
@@ -103,13 +103,13 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
         {
             return await Task.FromResult(
                 this.Problem(detail: exception.Message,
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
     }
 
     [HttpPost("userInfo")]
     [ProducesResponseType(typeof(UserInfoResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SetUserInfo(UserInfoRequest userInfoRequest)
     {
         string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
@@ -117,13 +117,13 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
         if (userInfoRequest.UserInfo == null)
         {
             return await Task.FromResult(
                 this.Problem(detail: "No user info was provided.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
 
         try
@@ -137,7 +137,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
         {
             return await Task.FromResult(
                 this.Problem(detail: exception.Message,
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
     }
 }
