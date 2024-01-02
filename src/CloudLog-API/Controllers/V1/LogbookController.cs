@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Asp.Versioning;
 using CloudLogAPI.Entities;
 using CloudLogAPI.Exceptions;
@@ -29,7 +28,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
 
     [HttpGet]
     [ProducesResponseType(typeof(ListJumpsResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> ListJumps([FromQuery] ListJumpsRequest request)
     {
         // How to get email
@@ -40,7 +39,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
         var loggedJumps = this.LogbookService.ListJumps(
             id: userId!,
@@ -51,7 +50,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
 
     [HttpPost]
     [ProducesResponseType(typeof(LogJumpResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> LogJump([FromBody] LogJumpRequest request)
     {
@@ -60,7 +59,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found or request is empty.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
         request.Jump.Id = userId;
         try
@@ -79,7 +78,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
 
     [HttpPut]
     [ProducesResponseType(typeof(EditJumpResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> EditJump(EditJumpRequest request)
     {
@@ -88,7 +87,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found or request is empty.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
         request.Jump.Id = userId;
         try
@@ -107,7 +106,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
 
     [HttpDelete]
     [ProducesResponseType(typeof(DeleteJumpResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> DeleteJump(DeleteJumpRequest request)
     {
@@ -116,7 +115,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
         {
             return await Task.FromResult(
                 this.Problem(detail: "User ID not found.",
-                statusCode: StatusCodes.Status404NotFound));
+                statusCode: StatusCodes.Status400BadRequest));
         }
         LoggedJump jump = new()
         {

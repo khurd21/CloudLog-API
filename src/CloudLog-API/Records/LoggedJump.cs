@@ -8,19 +8,17 @@ namespace CloudLogAPI.Records;
 [DynamoDBTable(nameof(LoggedJump))]
 public sealed class LoggedJump
 {
-    public LoggedJump() {}
-
     [DynamoDBHashKey]
     [JsonIgnore]
     public string? Id { get; set; }
 
     [DynamoDBRangeKey]
     [Required]
-    public int JumpNumber { get; init; }
+    public int? JumpNumber { get; init; }
 
     [DynamoDBProperty]
     [Required]
-    public DateTime Date { get; init; }
+    public DateTime? Date { get; init; }
 
     [DynamoDBProperty]
     [Required]
@@ -31,6 +29,12 @@ public sealed class LoggedJump
 
     [DynamoDBProperty]
     public int? Altitude { get; init; }
+
+    [DynamoDBProperty]
+    public int? PullAltitude { get; init; }
+
+    [DynamoDBProperty]
+    public int? WindSpeedKnots { get; init; }
 
     [DynamoDBProperty]
     public string? Parachute { get; init; }
@@ -44,4 +48,12 @@ public sealed class LoggedJump
 
     [DynamoDBProperty]
     public string? Description { get; init; }
+
+    [DynamoDBProperty]
+    [Required]
+    public string? SignedBy { get; init; }
+
+    [DynamoDBProperty]
+    [Required]
+    public string? SignersLicenseNumber { get; init; }
 }
