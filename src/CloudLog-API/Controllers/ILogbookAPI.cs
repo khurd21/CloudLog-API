@@ -1,4 +1,4 @@
-using CloudLogAPI.Entities;
+using CloudLogAPI.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CloudLogAPI.Controllers;

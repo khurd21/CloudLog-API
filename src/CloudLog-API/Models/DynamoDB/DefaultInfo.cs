@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Amazon.DynamoDBv2.DataModel;
 
-namespace CloudLogAPI.Records;
+namespace CloudLogAPI.Models.DynamoDB;
 
 [DynamoDBTable(nameof(UserInfo))]
 public sealed class DefaultInfo

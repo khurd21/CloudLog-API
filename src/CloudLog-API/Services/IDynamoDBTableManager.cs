@@ -1,6 +1,6 @@
 using Amazon.DynamoDBv2.Model;
 
-namespace CloudLogAPI.Repositories;
+namespace CloudLogAPI.Services;
 
 public interface IDynamoDBTableManager
 {

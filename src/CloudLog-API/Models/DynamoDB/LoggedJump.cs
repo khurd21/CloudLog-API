@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Amazon.DynamoDBv2.DataModel;
-using CloudLogAPI.Entities;
 
-namespace CloudLogAPI.Records;
+namespace CloudLogAPI.Models.DynamoDB;
 
 [DynamoDBTable(nameof(LoggedJump))]
 public sealed class LoggedJump

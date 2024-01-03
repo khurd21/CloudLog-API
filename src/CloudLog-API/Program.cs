@@ -1,12 +1,9 @@
-using System.Security.Claims;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Asp.Versioning;
-using CloudLogAPI.Repositories;
-using Microsoft.AspNetCore.Authentication;
+using CloudLogAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 

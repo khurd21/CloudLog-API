@@ -1,8 +1,9 @@
 using Asp.Versioning;
-using CloudLogAPI.Entities;
 using CloudLogAPI.Exceptions;
-using CloudLogAPI.Records;
-using CloudLogAPI.Repositories;
+using CloudLogAPI.Models.DynamoDB;
+using CloudLogAPI.Models.Requests;
+using CloudLogAPI.Models.Responses;
+using CloudLogAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
