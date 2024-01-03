@@ -1,6 +1,6 @@
-using CloudLogAPI.Records;
+using CloudLogAPI.Models.DynamoDB;
 
-namespace CloudLogAPI.Repositories;
+namespace CloudLogAPI.Services;
 
 public interface IUserInfoService
 {

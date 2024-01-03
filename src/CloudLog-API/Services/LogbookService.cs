@@ -1,9 +1,9 @@
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using CloudLogAPI.Exceptions;
-using CloudLogAPI.Records;
+using CloudLogAPI.Models.DynamoDB;
 
-namespace CloudLogAPI.Repositories;
+namespace CloudLogAPI.Services;
 
 public class LogbookService : ILogbookService
 {

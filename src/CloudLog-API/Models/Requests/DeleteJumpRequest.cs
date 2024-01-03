@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CloudLogAPI.Entities;
+namespace CloudLogAPI.Models.Requests;
 
 public sealed class DeleteJumpRequest
 {

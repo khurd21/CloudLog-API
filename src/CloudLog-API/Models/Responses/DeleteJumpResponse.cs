@@ -1,6 +1,6 @@
-using CloudLogAPI.Records;
+using CloudLogAPI.Models.DynamoDB;
 
-namespace CloudLogAPI.Entities;
+namespace CloudLogAPI.Models.Responses;
 
 public sealed class DeleteJumpResponse
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using FoolProof.Core;
 
-namespace CloudLogAPI.Entities;
+namespace CloudLogAPI.Models.Requests;
 
 public sealed class ListJumpsRequest
 {

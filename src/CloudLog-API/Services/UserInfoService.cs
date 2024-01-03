@@ -1,9 +1,8 @@
 using Amazon.DynamoDBv2.DataModel;
 using CloudLogAPI.Exceptions;
-using CloudLogAPI.Records;
-using Microsoft.IdentityModel.Tokens;
+using CloudLogAPI.Models.DynamoDB;
 
-namespace CloudLogAPI.Repositories;
+namespace CloudLogAPI.Services;
 
 public class UserInfoService : IUserInfoService
 {

@@ -1,8 +1,8 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
-using CloudLogAPI.Records;
+using CloudLogAPI.Models.DynamoDB;
 
-namespace CloudLogAPI.Repositories;
+namespace CloudLogAPI.Services;
 
 public class DynamoDBTableManager : IDynamoDBTableManager
 {
