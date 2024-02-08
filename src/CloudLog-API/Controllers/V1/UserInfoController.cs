@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Asp.Versioning;
 using CloudLogAPI.Exceptions;
 using CloudLogAPI.Models.Requests;
@@ -27,7 +28,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetDefaultInfo()
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId == null || userId.IsNullOrEmpty())
         {
             return await Task.FromResult(
@@ -53,7 +54,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetUserInfo()
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId == null || userId.IsNullOrEmpty())
         {
             return await Task.FromResult(
@@ -79,7 +80,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SetDefaultInfo(DefaultInfoRequest defaultInfoRequest)
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId == null || userId.IsNullOrEmpty())
         {
             return await Task.FromResult(
@@ -113,7 +114,7 @@ public sealed class UserInfoController : ControllerBase, IDefaultInfoAPI, IUserI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SetUserInfo(UserInfoRequest userInfoRequest)
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId == null || userId.IsNullOrEmpty())
         {
             return await Task.FromResult(

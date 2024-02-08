@@ -67,14 +67,6 @@ builder.Services.AddSingleton<IDynamoDBContext, DynamoDBContext>(context =>
 });
 
 /// <summary>
-/// Creates the DynamoDBTableManager injection.
-/// </summary>
-/// <typeparam name="IDynamoDBTableManager">Interface for which to inject.</typeparam>
-/// <typeparam name="DynamoDBTableManager">Implementing class of IDynamoDBTableManager.</typeparam>
-/// <returns>The singleton that implements the IDynamoDBTableManager.</returns>
-builder.Services.AddSingleton<IDynamoDBTableManager, DynamoDBTableManager>();
-
-/// <summary>
 /// Creates the LogbookService injection.
 /// </summary>
 /// <typeparam name="ILogbookService">Interface for which to inject.</typeparam>
@@ -128,10 +120,6 @@ var app = builder.Build();
 // TODO: Is this the best way to do it? What if we created a script that made it for us?
 if (app.Environment.IsDevelopment())
 {
-    var tableManager = app.Services.GetRequiredService<IDynamoDBTableManager>();
-    tableManager.DeleteTables();
-    tableManager.CreateTables();
-
     // Configure the HTTP request pipeline.
     app.UseSwagger();
     app.UseSwaggerUI();

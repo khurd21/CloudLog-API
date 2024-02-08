@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Asp.Versioning;
 using CloudLogAPI.Exceptions;
 using CloudLogAPI.Models.DynamoDB;
@@ -33,9 +34,9 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
     public async Task<IActionResult> ListJumps([FromQuery] ListJumpsRequest request)
     {
         // How to get email
-        this.Logger.LogInformation(User.Claims.FirstOrDefault(c => c.Type == "email")?.Value);
         this.Logger.LogInformation($"{nameof(ListJumps)} called.");
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+        this.Logger.LogInformation($"User ID: {userId}");
         if (userId.IsNullOrEmpty())
         {
             return await Task.FromResult(
@@ -55,7 +56,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> LogJump([FromBody] LogJumpRequest request)
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId.IsNullOrEmpty() || request.Jump == null)
         {
             return await Task.FromResult(
@@ -83,7 +84,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> EditJump(EditJumpRequest request)
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId.IsNullOrEmpty() || request.Jump == null)
         {
             return await Task.FromResult(
@@ -111,7 +112,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> DeleteJump(DeleteJumpRequest request)
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId.IsNullOrEmpty())
         {
             return await Task.FromResult(
