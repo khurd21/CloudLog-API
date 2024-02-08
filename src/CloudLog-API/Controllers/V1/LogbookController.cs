@@ -112,7 +112,7 @@ public sealed class LogbookController : ControllerBase, ILogbookAPI
     [ProducesResponseType(typeof(ObjectResult), StatusCodes.Status406NotAcceptable)]
     public async Task<IActionResult> DeleteJump(DeleteJumpRequest request)
     {
-        string? userId = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+        string? userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         if (userId.IsNullOrEmpty())
         {
             return await Task.FromResult(

@@ -9,3 +9,16 @@ services:
    volumes:
      - "./docker/dynamodb:/home/dynamodblocal/data"
    working_dir: /home/dynamodblocal
+
+
+ cloud-log-api:
+  environment:
+   - ASPNETCORE_ENVIRONMENT=Production
+   - ASPNETCORE_URLS=http://+:7379;https://+:5285
+  build:
+   context: ./src/CloudLog-API
+   dockerfile: Dockerfile
+  ports:
+     - "5001:80"  # Adjust port as needed
+  depends_on:
+      - dynamodb-local
